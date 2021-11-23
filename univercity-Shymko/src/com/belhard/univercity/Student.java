@@ -1,17 +1,40 @@
 package com.belhard.univercity;
 
-public class Student {
+public class Student extends Person {
 	
-	private String faculty;
-	private String groupNumber;
+	private Faculty faculty;
+	private Group group;
 	private double scholarship;
-	private Address address;
-	private Personal personal;
+	private double averageScore;
 	
-	public Student(String faculty, String groupNumber, double scholarship) {
+	public Student(long id, String firstName, String lastName) {
+		super(id, firstName, lastName);
+	}
+	
+	public Student(long id, String firstName, String lastName, Faculty faculty, double scholarship, double averageScore) {
+		this(id, firstName, lastName);
 		this.faculty = faculty;
-		this.groupNumber = groupNumber;
 		this.scholarship = scholarship;
+		this.averageScore = averageScore;
+	}
+	
+	public Student(long id, String firstName, String lastName, double averageScore) {
+		this(id, firstName, lastName);
+		this.averageScore = averageScore;
+	}
+	
+	public boolean setAverageScore(double averageScore) {
+		if (averageScore > 0.0 && averageScore <= 10.0 ) {
+			this.averageScore = averageScore;
+			return true;
+		}
+		System.out.println("Please set correct value!");
+		return false;
+		
+	}
+	
+	public double getAverageScore() {
+		return averageScore;
 	}
 	
 	public boolean setScholarship(double scholarship) {
@@ -26,40 +49,25 @@ public class Student {
 		return scholarship;
 	}
 	
-	public void setFaculty(String faculty) {
+	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
 	
-	public String getFaculty() {
+	public Faculty getFaculty() {
 		return faculty;
 	}
 	
-	public void setGroupNumber(String groupNumber) {
-		this.groupNumber = groupNumber;
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 	
-	public String getGroupNumber() {
-		return groupNumber;
-	}
-	
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	
-	public Address getAddress() {
-		return address;
-	}
-	
-	public void setPersonal(Personal personal) {
-		this.personal = personal;
-	}
-	
-	public Personal getPersonal() {
-		return personal;
-	}
-	
+	@Override
 	public String toString() {
-		return "Student: "  + personal  + "\n\tAddress: " + address + "\n\tFaculty: " + faculty + "\n\tGroup number: " + groupNumber + "\n\tScholarship: " + scholarship;
+		return "Student: "  +  "\n\tFaculty: " + faculty + "\n\tScholarship: " + scholarship;
 	}
 
 }

@@ -1,21 +1,21 @@
 package com.belhard.univercity;
 
 public class Address {
-	private String country;
+	private Country country;
 	private String city;
 	private String street;
 	private int houseNumber;
 	private int flatNumber;
 	private String block;
 	
-	public Address(String country, String city, String street, int houseNumber) {
+	public Address(Country country, String city, String street, int houseNumber) {
 		this.country = country;
 		this.city = city;
 		this.street = street;
 		this.houseNumber = houseNumber;
 	}
 	
-	public Address(String country, String city, String street, int houseNumber, String block) {
+	public Address(Country country, String city, String street, int houseNumber, String block) {
 		this.country = country;
 		this.city = city;
 		this.street = street;
@@ -23,7 +23,7 @@ public class Address {
 		this.block = block;
 	}
 	
-	public Address(String country, String city, String street, int houseNumber, int flatNumber) {
+	public Address(Country country, String city, String street, int houseNumber, int flatNumber) {
 		this.country = country;
 		this.city = city;
 		this.street = street;
@@ -31,7 +31,7 @@ public class Address {
 		this.flatNumber = flatNumber;
 	}
 	
-	public Address(String country, String city, String street, int houseNumber, int flatNumber, String block) {
+	public Address(Country country, String city, String street, int houseNumber, int flatNumber, String block) {
 		this.country = country;
 		this.city = city;
 		this.street = street;
@@ -40,11 +40,11 @@ public class Address {
 		this.block = block;
 	}
 	
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 	
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 	
@@ -88,6 +88,7 @@ public class Address {
 		return block;
 	}
 	
+	@Override
 	public String toString() {
 		String str = country + ", " + city + ", " + street + ", " + houseNumber;
 		if ( block != null) {

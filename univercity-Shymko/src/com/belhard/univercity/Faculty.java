@@ -1,0 +1,5 @@
+package com.belhard.univercity;
+
+public enum Faculty {
+	PHILOSOPHY, MATEMATICS, NATURAL_SCIENCIES, MEDECINE, PHYSICS, JOURNALISM, SPORT, COMPUTER_SCIENCE 
+}

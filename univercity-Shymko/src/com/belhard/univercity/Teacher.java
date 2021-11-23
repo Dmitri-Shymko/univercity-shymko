@@ -1,41 +1,58 @@
 package com.belhard.univercity;
 
-public class Teacher {
-	
-	private Personal personal;
-	private Address address;
-	private double salary;
-	
-	public boolean setSalary(double salary) {
-		if (salary > 0.0) {
-			this.salary = salary;
-			return true;
-		}
-		return false;
+public class Teacher extends Employee {
+
+	private Degree degree;
+	private String courseName;
+	private Group group;
+	private NameOfDepartment nameOfDepartment;
+
+	public Teacher(long id, String firstName, String lastName) {
+		super(id, firstName, lastName);
 	}
-	
-	public double getSalary() {
-		return salary;
+
+	public Teacher(long id, String firstName, String lastName, Degree degree, String courseName, NameOfDepartment nameOfDepartment) {
+		this(id, firstName, lastName);
+		this.degree = degree;
+		this.courseName = courseName;
+		this.nameOfDepartment = nameOfDepartment;
 	}
-	
-	public void setAddress(Address address) {
-		this.address = address;
+
+	public Group getGroup() {
+		return group;
 	}
-	
-	public Address getAddress() {
-		return address;
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
-	
-	public void setPersonal(Personal personal) {
-		this.personal = personal;
+
+	public String getCourseName() {
+		return courseName;
 	}
-	
-	public Personal getPersonal() {
-		return personal;
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
-	
+
+	public Degree getDegree() {
+		return degree;
+	}
+
+	public void setDegree(Degree degree) {
+		this.degree = degree;
+	}
+
+	public NameOfDepartment getNameOfDepartment() {
+		return nameOfDepartment;
+	}
+
+	public void setNameOfDepartment(NameOfDepartment nameOfDepartment) {
+		this.nameOfDepartment = nameOfDepartment;
+	}
+
+	@Override
 	public String toString() {
-		return "Teacher: " + "\n\tPersonal data: " + personal + "\n\tAddress: " + address + "\n\tSalary: " + salary;
+		return "Teacher: " + "\n\tDegree: " + degree + "\n\tCourse Name: " + courseName + "\n\tName Of Department: " + nameOfDepartment;
 	}
 
 }
