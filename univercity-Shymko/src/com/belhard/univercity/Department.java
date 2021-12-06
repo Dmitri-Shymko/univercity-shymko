@@ -1,6 +1,9 @@
 package com.belhard.univercity;
 
-public class Department {
+import java.util.Arrays;
+import java.util.Objects;
+
+public class Department implements Identifiable {
 
 	private NameOfDepartment nameOfDepartment;
 	private long deparmentId;
@@ -10,6 +13,31 @@ public class Department {
 	private DeputyHeadOfDepartment deputyHeadOfDeparment;
 	private Cleaner cleaner;
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(teachers);
+		result = prime * result + Objects.hash(cleaner, deparmentId, deputyHeadOfDeparment, headOfDeparment,
+				nameOfDepartment, numberOfTeachers);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Department other = (Department) obj;
+		return Objects.equals(cleaner, other.cleaner) && deparmentId == other.deparmentId
+				&& Objects.equals(deputyHeadOfDeparment, other.deputyHeadOfDeparment)
+				&& Objects.equals(headOfDeparment, other.headOfDeparment) && nameOfDepartment == other.nameOfDepartment
+				&& numberOfTeachers == other.numberOfTeachers && Arrays.equals(teachers, other.teachers);
+	}
+
 	public DeputyHeadOfDepartment getDeputyHeadOfDeparment() {
 		return deputyHeadOfDeparment;
 	}
@@ -18,11 +46,11 @@ public class Department {
 		this.deputyHeadOfDeparment = deputyHeadOfDeparment;
 	}
 
-	public long getDeparmentId() {
+	public long getId() {
 		return deparmentId;
 	}
 
-	public void setDeparmentId(long deparmentId) {
+	public void setId(long deparmentId) {
 		this.deparmentId = deparmentId;
 	}
 
@@ -103,18 +131,12 @@ public class Department {
 		}
 		if (department.getHeadOfDeparment() != null) {
 			teachersSalary = teachersSalary + AccountantUtil.bruttoSalaryPerMonth(headOfDeparment);
-		} else {
-			teachersSalary = teachersSalary;
 		}
 		if (department.getDeputyHeadOfDeparment() != null) {
 			teachersSalary = teachersSalary + AccountantUtil.bruttoSalaryPerMonth(deputyHeadOfDeparment);
-		} else {
-			teachersSalary = teachersSalary;
 		}
 		if (department.getCleaner() != null) {
 			teachersSalary = teachersSalary + AccountantUtil.bruttoSalaryPerMonth(cleaner);
-		} else {
-			teachersSalary = teachersSalary;
 		}
 		System.out.println("\n\tDepartment month costs is: " + teachersSalary);
 	}

@@ -1,6 +1,6 @@
 package com.belhard.univercity;
 
-public class Employee extends Person {
+public abstract class Employee extends Person {
 
 	private double salary;
 	private NameOfDepartment nameOfDepartment;

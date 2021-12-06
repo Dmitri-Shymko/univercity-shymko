@@ -4,12 +4,13 @@ public class DeputyHeadOfDepartment extends Employee {
 
 	private Degree degree;
 	private NameOfDepartment nameOfDepartment;
-	
+
 	public DeputyHeadOfDepartment(long id, String firstName, String lastName) {
 		super(id, firstName, lastName);
 	}
 
-	public DeputyHeadOfDepartment(long id, String firstName, String lastName, Degree degree, NameOfDepartment nameOfDepartment) {
+	public DeputyHeadOfDepartment(long id, String firstName, String lastName, Degree degree,
+			NameOfDepartment nameOfDepartment) {
 		this(id, firstName, lastName);
 		this.degree = degree;
 		this.nameOfDepartment = nameOfDepartment;
@@ -34,5 +35,12 @@ public class DeputyHeadOfDepartment extends Employee {
 	@Override
 	public String toString() {
 		return "HeadOfDepartment: " + nameOfDepartment + "\n\tDegree: " + degree;
+	}
+
+	@Override
+	public void introduceYourself() {
+		System.out.printf("Hello my name is %s %s. I'm deputy head of %s department. And my degree is %s.",
+				getFirstName(), getLastName(), getDepartment(), getDegree());
+
 	}
 }

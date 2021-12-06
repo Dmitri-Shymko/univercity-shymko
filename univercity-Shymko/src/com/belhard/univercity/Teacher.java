@@ -1,6 +1,6 @@
 package com.belhard.univercity;
 
-public class Teacher extends Employee {
+public class Teacher extends Employee implements Identifiable {
 
 	private Degree degree;
 	private String courseName;
@@ -11,7 +11,8 @@ public class Teacher extends Employee {
 		super(id, firstName, lastName);
 	}
 
-	public Teacher(long id, String firstName, String lastName, Degree degree, String courseName, NameOfDepartment nameOfDepartment) {
+	public Teacher(long id, String firstName, String lastName, Degree degree, String courseName,
+			NameOfDepartment nameOfDepartment) {
 		this(id, firstName, lastName);
 		this.degree = degree;
 		this.courseName = courseName;
@@ -52,7 +53,15 @@ public class Teacher extends Employee {
 
 	@Override
 	public String toString() {
-		return "Teacher: " + "\n\tDegree: " + degree + "\n\tCourse Name: " + courseName + "\n\tName Of Department: " + nameOfDepartment;
+		return "Teacher: " + "\n\tDegree: " + degree + "\n\tCourse Name: " + courseName + "\n\tName Of Department: "
+				+ nameOfDepartment;
+	}
+
+	@Override
+	public void introduceYourself() {
+		System.out.printf("Hello my name is %s %s. I'm teacher of %s. And my degree is %s.", getFirstName(),
+				getLastName(), getCourseName(), getDegree());
+
 	}
 
 }

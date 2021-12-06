@@ -1,74 +1,83 @@
 package com.belhard.univercity;
 
-public class Group {
+import java.util.Arrays;
+import java.util.Objects;
+
+public class Group implements Identifiable {
 
 	private long groupId;
-	private final Student[] students = new Student[8];
+	private final MyCollection students = new MyDynamicArray();
 	private Teacher teacher;
-	private int numberOfStudents;
 	private double groupAverageScore;
+	private int maxCapacity = 8;
 
-	public long getGroupId() {
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + Arrays.hashCode(students);
+//		result = prime * result + Objects.hash(groupAverageScore, groupId, numberOfStudents, teacher);
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Group other = (Group) obj;
+//		return Double.doubleToLongBits(groupAverageScore) == Double.doubleToLongBits(other.groupAverageScore)
+//				&& groupId == other.groupId && numberOfStudents == other.numberOfStudents
+//				&& Arrays.equals(students, other.students) && Objects.equals(teacher, other.teacher);
+//	}
+	
+	
+	public long getId() {
 		return groupId;
 	}
 
-	public void setGroupId(long groupId) {
+	public void setId(long groupId) {
 		this.groupId = groupId;
 	}
 
 	public Student[] getStudent() {
-		Student[] copy = new Student[students.length];
-		for (int i = 0; i < students.length; i++) {
-			copy[i] = students[i];
-		}
-		return copy;
+		return (Student[]) students.toArray();
 	}
 
 	public int getNumberOfStudents() {
-		return numberOfStudents;
+		return students.size();
 	}
 
 	public boolean addStudents(Student student) {
-		if (numberOfStudents < students.length) {
-			students[numberOfStudents++] = student;
+		if (getNumberOfStudents() < maxCapacity) {
+			students.add(student);
 			return true;
 		}
 		return false;
 
 	}
 
-	public boolean removeStudent(long id) {
-		boolean isDelited = false;
-		int initialNumber = numberOfStudents;
-		for (int i = 0; i < initialNumber; i++) {
-			if (!isDelited && students[i].getId() == id) {
-				students[i] = null;
-				numberOfStudents--;
-				isDelited = true;
-			}
-			if (isDelited && i < students.length - 1) {
-				students[i] = students[i + 1];
-			}
-			if (isDelited && i == students.length - 1) {
-				students[i] = null;
-			}
-
-		}
-		return false;
+	public boolean removeStudent(Student student) {
+		return students.remove(student);
 	}
 
 	public double getGroupAverageScore() {
-		for (int i = 0; i < numberOfStudents; i++) {
+		for (int i = 0; i < students.size(); i++) {
 			groupAverageScore += students[i].getAverageScore();
 		}
-		return groupAverageScore / numberOfStudents;
+		if (students.size() != 0) {
+		return groupAverageScore / students.size();
+		}
 	}
 
 	public int availablePlaces() {
-		int places = students.length - numberOfStudents;
+		int places = maxCapacity - students.size();
 		return places;
 	}
-	
+
 	public void printAvailablePlaces() {
 		System.out.println("\nNumber of available places in the group: " + availablePlaces());
 	}
@@ -79,6 +88,14 @@ public class Group {
 
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
+	}
+
+	public int getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
 	}
 
 }

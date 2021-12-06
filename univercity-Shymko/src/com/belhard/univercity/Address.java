@@ -1,5 +1,7 @@
 package com.belhard.univercity;
 
+import java.util.Objects;
+
 public class Address {
 	private Country country;
 	private String city;
@@ -40,6 +42,25 @@ public class Address {
 		this.block = block;
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(block, city, country, flatNumber, houseNumber, street);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		return Objects.equals(block, other.block) && Objects.equals(city, other.city) && country == other.country
+				&& flatNumber == other.flatNumber && houseNumber == other.houseNumber
+				&& Objects.equals(street, other.street);
+	}
+
 	public void setCountry(Country country) {
 		this.country = country;
 	}

@@ -17,7 +17,7 @@ public class App {
 		group.addStudents(student4);
 		Util.printStudentList(group);
 
-		group.removeStudent(student1.getId());
+//		group.removeStudent(student1.getId());
 		Util.printStudentList(group);
 		System.out.println("\n\tGroup size: " + group.getNumberOfStudents());
 
@@ -64,14 +64,18 @@ public class App {
 		department.addTeachers(teach4);
 		department.addTeachers(teach5);
 		
-//		department.setHeadOfDeparment(head);
+		department.setHeadOfDeparment(head);
 		department.setDeputyHeadOfDeparment(deputyHead);
 		department.setCleaner(cleaner);
 		
-//		department.setCleaner(null);
+		department.setCleaner(null);
 		
-//		department.departmentMonthCosts(department);
 		Util.printDepartmentList(department);
+		department.departmentMonthCosts(department);
+		
+		System.out.println(group.hashCode());
+		
+//		student1.introduceYourself();
 
 	}
 
