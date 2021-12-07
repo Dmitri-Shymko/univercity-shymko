@@ -1,4 +1,4 @@
-package com.belhard.univercity;
+package com.belhard.univercity.datastructures;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -62,8 +62,11 @@ public class MyDynamicArray implements MyCollection {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] copy = new Object[array.length];
+		for (int i = 0; i < array.length; i++) {
+			copy[i] = array[i];
+		}
+		return copy;
 	}
 
 	@Override
@@ -86,5 +89,5 @@ public class MyDynamicArray implements MyCollection {
 		MyDynamicArray other = (MyDynamicArray) obj;
 		return Arrays.deepEquals(array, other.array) && size == other.size;
 	}
-	
+
 }

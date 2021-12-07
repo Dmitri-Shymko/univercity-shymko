@@ -1,4 +1,4 @@
-package com.belhard.univercity;
+package com.belhard.univercity.datastructures;
 
 public interface MyCollection {
 	int size();

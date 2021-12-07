@@ -1,7 +1,7 @@
 package com.belhard.univercity;
 
-import java.util.Arrays;
-import java.util.Objects;
+import com.belhard.univercity.datastructures.MyCollection;
+import com.belhard.univercity.datastructures.MyDynamicArray;
 
 public class Group implements Identifiable {
 
@@ -65,12 +65,15 @@ public class Group implements Identifiable {
 	}
 
 	public double getGroupAverageScore() {
+		double result = 0;
 		for (int i = 0; i < students.size(); i++) {
+			Student[] students = new Student[8];
 			groupAverageScore += students[i].getAverageScore();
 		}
 		if (students.size() != 0) {
-		return groupAverageScore / students.size();
+		result = groupAverageScore / students.size();
 		}
+		return result;
 	}
 
 	public int availablePlaces() {

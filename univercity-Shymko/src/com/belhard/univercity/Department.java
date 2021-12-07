@@ -1,42 +1,42 @@
 package com.belhard.univercity;
 
-import java.util.Arrays;
-import java.util.Objects;
+import com.belhard.univercity.datastructures.MyCollection;
+import com.belhard.univercity.datastructures.MyDynamicArray;
 
 public class Department implements Identifiable {
 
 	private NameOfDepartment nameOfDepartment;
 	private long deparmentId;
-	private int numberOfTeachers;
-	private final Teacher[] teachers = new Teacher[8];
+	private int maxCapacity = 8;
+	private final MyCollection teachers = new MyDynamicArray();
 	private HeadOfDepartment headOfDeparment;
 	private DeputyHeadOfDepartment deputyHeadOfDeparment;
 	private Cleaner cleaner;
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(teachers);
-		result = prime * result + Objects.hash(cleaner, deparmentId, deputyHeadOfDeparment, headOfDeparment,
-				nameOfDepartment, numberOfTeachers);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Department other = (Department) obj;
-		return Objects.equals(cleaner, other.cleaner) && deparmentId == other.deparmentId
-				&& Objects.equals(deputyHeadOfDeparment, other.deputyHeadOfDeparment)
-				&& Objects.equals(headOfDeparment, other.headOfDeparment) && nameOfDepartment == other.nameOfDepartment
-				&& numberOfTeachers == other.numberOfTeachers && Arrays.equals(teachers, other.teachers);
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + Arrays.hashCode(teachers);
+//		result = prime * result + Objects.hash(cleaner, deparmentId, deputyHeadOfDeparment, headOfDeparment,
+//				nameOfDepartment, numberOfTeachers);
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Department other = (Department) obj;
+//		return Objects.equals(cleaner, other.cleaner) && deparmentId == other.deparmentId
+//				&& Objects.equals(deputyHeadOfDeparment, other.deputyHeadOfDeparment)
+//				&& Objects.equals(headOfDeparment, other.headOfDeparment) && nameOfDepartment == other.nameOfDepartment
+//				&& numberOfTeachers == other.numberOfTeachers && Arrays.equals(teachers, other.teachers);
+//	}
 
 	public DeputyHeadOfDepartment getDeputyHeadOfDeparment() {
 		return deputyHeadOfDeparment;
@@ -63,40 +63,20 @@ public class Department implements Identifiable {
 	}
 
 	public Teacher[] getTeacher() {
-		Teacher[] copy = new Teacher[teachers.length];
-		for (int i = 0; i < teachers.length; i++) {
-			copy[i] = teachers[i];
-		}
-		return copy;
+		return (Teacher[]) teachers.toArray();
 	}
 
 	public boolean addTeachers(Teacher teacher) {
-		if (numberOfTeachers < teachers.length) {
-			teachers[numberOfTeachers++] = teacher;
+		if (getNumberOfTeachers() < maxCapacity) {
+			teachers.add(teacher);
 			return true;
 		}
 		return false;
 
 	}
 
-	public boolean removeTeacher(long id) {
-		boolean isDelited = false;
-		int initialNumber = numberOfTeachers;
-		for (int i = 0; i < initialNumber; i++) {
-			if (!isDelited && teachers[i].getId() == id) {
-				teachers[i] = null;
-				numberOfTeachers--;
-				isDelited = true;
-			}
-			if (isDelited && i < teachers.length - 1) {
-				teachers[i] = teachers[i + 1];
-			}
-			if (isDelited && i == teachers.length - 1) {
-				teachers[i] = null;
-			}
-
-		}
-		return false;
+	public boolean removeTeacher(Teacher teacher) {
+		return teachers.remove(teacher);
 	}
 
 	public HeadOfDepartment getHeadOfDeparment() {
@@ -116,11 +96,15 @@ public class Department implements Identifiable {
 	}
 
 	public int getNumberOfTeachers() {
-		return numberOfTeachers;
+		return teachers.size();
 	}
 
-	public void setNumberOfTeachers(int numberOfTeachers) {
-		this.numberOfTeachers = numberOfTeachers;
+	public int getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
 	}
 
 	public void departmentMonthCosts(Department department) {
