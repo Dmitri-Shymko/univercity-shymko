@@ -1,9 +1,10 @@
 package com.belhard.univercity.datastructures;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MyDynamicArray implements MyCollection {
+public class MyDynamicArray<E> implements MyCollection<E> {
 	private Object[] array = new Object[8];
 	private int size;
 
@@ -13,7 +14,7 @@ public class MyDynamicArray implements MyCollection {
 	}
 
 	@Override
-	public boolean add(Object obj) {
+	public boolean add(E obj) {
 		if (size >= array.length) {
 			array = Arrays.copyOf(array, array.length * 2);
 		}
@@ -23,7 +24,7 @@ public class MyDynamicArray implements MyCollection {
 	}
 
 	@Override
-	public boolean remove(Object obj) {
+	public boolean remove(E obj) {
 		boolean isDelited = false;
 		int initialNumber = size;
 		for (int i = 0; i < initialNumber; i++) {
@@ -44,7 +45,7 @@ public class MyDynamicArray implements MyCollection {
 	}
 
 	@Override
-	public boolean contains(Object obj) {
+	public boolean contains(E obj) {
 		for (int i = 1; i < size; i++) {
 			if (array[i].equals(obj)) {
 				return true;
@@ -55,18 +56,21 @@ public class MyDynamicArray implements MyCollection {
 	}
 
 	@Override
-	public Object get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+	public E get(int index) {
+		if (index > size) {
+			return null;
+		}
+		return (E) array[index];
 	}
 
 	@Override
-	public Object[] toArray() {
-		Object[] copy = new Object[array.length];
-		for (int i = 0; i < array.length; i++) {
-			copy[i] = array[i];
+	public E[] toArray(Class<E> clazz) {
+		E[] paramArray = (E[]) Array.newInstance(clazz, size);
+		for (int i = 0; i < size; i++) {
+			paramArray[i] = (E) array[i];
 		}
-		return copy;
+		return paramArray;
+
 	}
 
 	@Override

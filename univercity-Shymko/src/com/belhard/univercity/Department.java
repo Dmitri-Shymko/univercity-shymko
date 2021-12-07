@@ -8,7 +8,7 @@ public class Department implements Identifiable {
 	private NameOfDepartment nameOfDepartment;
 	private long deparmentId;
 	private int maxCapacity = 8;
-	private final MyCollection teachers = new MyDynamicArray();
+	private final MyCollection<Teacher> teachers = new MyDynamicArray();
 	private HeadOfDepartment headOfDeparment;
 	private DeputyHeadOfDepartment deputyHeadOfDeparment;
 	private Cleaner cleaner;
@@ -63,7 +63,7 @@ public class Department implements Identifiable {
 	}
 
 	public Teacher[] getTeacher() {
-		return (Teacher[]) teachers.toArray();
+		return teachers.toArray(Teacher.class);
 	}
 
 	public boolean addTeachers(Teacher teacher) {

@@ -1,15 +1,15 @@
 package com.belhard.univercity.datastructures;
 
-public interface MyCollection {
+public interface MyCollection<E> {
 	int size();
 
-	boolean add(Object obj);
+	boolean add(E obj);
 
-	boolean remove(Object obj);
+	boolean remove(E obj);
 
-	boolean contains(Object obj);
+	boolean contains(E obj);
 
-	Object get(int index);
+	E get(int index);
 
-	Object[] toArray();
+	E[] toArray(Class<E> clazz);
 }

@@ -6,7 +6,7 @@ import com.belhard.univercity.datastructures.MyDynamicArray;
 public class Group implements Identifiable {
 
 	private long groupId;
-	private final MyCollection students = new MyDynamicArray();
+	private final MyCollection<Student> students = new MyDynamicArray();
 	private Teacher teacher;
 	private double groupAverageScore;
 	private int maxCapacity = 8;
@@ -44,7 +44,7 @@ public class Group implements Identifiable {
 	}
 
 	public Student[] getStudent() {
-		return (Student[]) students.toArray();
+		return students.toArray(Student.class);
 	}
 
 	public int getNumberOfStudents() {
@@ -67,8 +67,8 @@ public class Group implements Identifiable {
 	public double getGroupAverageScore() {
 		double result = 0;
 		for (int i = 0; i < students.size(); i++) {
-			Student[] students = new Student[8];
-			groupAverageScore += students[i].getAverageScore();
+//			Student[] students = new Student[8];
+			groupAverageScore += getStudent()[i].getAverageScore();
 		}
 		if (students.size() != 0) {
 		result = groupAverageScore / students.size();
